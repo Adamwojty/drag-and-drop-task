@@ -5,6 +5,17 @@ export enum Actions {
   MOVE_ITEM = "MOVE_ITEM",
   REMOVE_ITEM = "REMOVE_ITEM",
 }
+export interface IInitialState {
+  [key: number]: {
+    top: number;
+    left: number;
+    title: string;
+    greens: {
+      idx: number;
+      title: string;
+    }[];
+  };
+}
 interface IGreens {
   idx: number;
   title: string;

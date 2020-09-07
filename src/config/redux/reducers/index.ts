@@ -1,17 +1,5 @@
-import { Actions } from "../models";
+import { Actions, IInitialState } from "../models";
 import update from "immutability-helper";
-
-interface IInitialState {
-  [key: number]: {
-    top: number;
-    left: number;
-    title: string;
-    greens: {
-      idx: number;
-      title: string;
-    }[];
-  };
-}
 
 const initialState: IInitialState = {};
 

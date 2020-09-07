@@ -29,7 +29,7 @@ export function addItem(id: number, obj: IItem): ActionTypes {
   };
 }
 
-export function moveItems(atIndex: number, id: number, item: any, index: number): ActionTypes {
+export function moveItems(atIndex: number, id: number, item: IItem, index: number): ActionTypes {
   return {
     type: Actions.MOVE_ITEM,
     payload: {
