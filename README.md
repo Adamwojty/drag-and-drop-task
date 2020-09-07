@@ -1,6 +1,7 @@
 ## React drag and drop task
 
 <a href="https://react-dnd-task.netlify.app"> Live version desktop </a>
+</br>
 <a href="https://react-dnd-mobile.netlify.app"> Live version mobile</a>
 
 
