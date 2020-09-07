@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+import DiagramingSpace from "./components/DiagramingSpace/DiagramingSpace";
+import Header from "./components/Header/Header";
+import DragLayer from "./components/DiagramingSpace/DragLayer";
 
-function App() {
+const App: React.FC<{}> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <Header />
+      <DiagramingSpace />
+      <DragLayer />
+    </Wrapper>
   );
-}
+};
+const Wrapper = styled.div`
+  border: 1px solid black;
+  width: 800px;
+  padding: 10px;
+  background-color: grey;
+`;
 
 export default App;
