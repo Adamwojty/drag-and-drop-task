@@ -50,10 +50,13 @@ const DiagramingSpace: React.FC<{}> = () => {
 };
 
 const Wrapper = styled.div`
-  width: 800px;
+  width: 100%;
   height: 600px;
   border: 3px solid black;
   position: relative;
   background-color: white;
+  @media (max-width: 900px) {
+    overflow-x: auto;
+  }
 `;
 export default DiagramingSpace;

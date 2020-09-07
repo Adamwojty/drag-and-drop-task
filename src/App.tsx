@@ -19,6 +19,9 @@ const Wrapper = styled.div`
   width: 800px;
   padding: 10px;
   background-color: grey;
+  @media (max-width: 900px) {
+    width: 80vw;
+  }
 `;
 
 export default App;
