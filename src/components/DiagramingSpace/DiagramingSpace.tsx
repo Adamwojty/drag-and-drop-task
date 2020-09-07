@@ -37,7 +37,7 @@ const DiagramingSpace: React.FC<{}> = () => {
       if (item.type === ItemTypes.COLUMN_ADD && Object.keys(data).length < 4 && left <= 650 && left >= 0) {
         [left, top] = snapToGrid(left, top);
         return dispatch(addColumn(item.id, obj));
-      } else if (item.type === ItemTypes.COLUMN && left <= 650 && left >= 0) {
+      } else if (item.type === ItemTypes.COLUMN && left <= 625 && left >= 0) {
         dispatch(moveColumn(item.id, left));
       }
       return undefined;
