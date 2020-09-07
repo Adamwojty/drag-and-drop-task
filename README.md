@@ -1,6 +1,8 @@
 ## React drag and drop task
 
-<a href="https://react-dnd-task.netlify.app"> Live version </a>
+<a href="https://react-dnd-task.netlify.app"> Live version desktop </a>
+<a href="https://react-dnd-mobile.netlify.app"> Live version mobile</a>
+
 
 ## Tech
 
@@ -16,6 +18,7 @@
     <li>Drag red square into diagramming space</li>
     <li>Drag green square into red columns</li>
 </ol>
+##
 <ol>
     <li>You can only drag red squares into diagramming space</li>
     <li>Green suares can't be placed into diagramming space</li>
