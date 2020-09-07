@@ -5,9 +5,9 @@ import { ItemTypes } from "../../assets/data";
 import Column from "./Column";
 import { IDraggableColumnProps } from "./Column.types";
 
-const DraggableColumn: React.FC<IDraggableColumnProps> = ({ id, title, left, top }) => {
+const DraggableColumn: React.FC<IDraggableColumnProps> = ({ id, title, left }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.COLUMN, id, left, top, title },
+    item: { type: ItemTypes.COLUMN, id, left, title },
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -15,7 +15,7 @@ const DraggableColumn: React.FC<IDraggableColumnProps> = ({ id, title, left, top
 
   return (
     <Wrapper ref={drag} left={left} isDragging={isDragging}>
-      <Column id={id} />
+      <Column colId={id} />
     </Wrapper>
   );
 };

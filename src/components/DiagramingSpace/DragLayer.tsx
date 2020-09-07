@@ -20,7 +20,7 @@ const DragLayer: React.FC<{}> = () => {
       case ItemTypes.COLUMN:
         return <ColumnDragPreview id={item.id} />;
       case ItemTypes.ITEM:
-        return <DragItemPreview title={item.title} id={item.id} />;
+        return <DragItemPreview title={item.title} />;
       default:
         return null;
     }

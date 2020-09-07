@@ -12,11 +12,10 @@ enum Colors {
 const Header: React.FC<{}> = () => {
   const data = useSelector((state: RootStateOrAny) => state.reducer);
   const left: number = 0;
-  const top: number = 0;
   const id: number = Object.keys(data).length;
   return (
     <Wrapper>
-      <DragItem color={Colors.RED} id={id} itemType={ItemTypes.COLUMN_ADD} left={left} top={top} />
+      <DragItem color={Colors.RED} id={id} itemType={ItemTypes.COLUMN_ADD} left={left} />
       <DragItem color={Colors.GREEN} id={id} itemType={ItemTypes.ITEM_ADD} />
     </Wrapper>
   );

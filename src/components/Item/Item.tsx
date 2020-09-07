@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IItemProps } from "./Item.types";
 
-const Item: React.FC<IItemProps> = ({ title, id }) => {
+const Item: React.FC<IItemProps> = ({ title }) => {
   return (
     <Wrapper>
       <p>{title}</p>

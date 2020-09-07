@@ -6,7 +6,7 @@ import { IColumnDragPreviewProps } from "./Column.types";
 const ColumnDragPreview: React.FC<IColumnDragPreviewProps> = memo(({ id }) => {
   return (
     <Wrapper>
-      <Column id={id} />
+      <Column colId={id} />
     </Wrapper>
   );
 });

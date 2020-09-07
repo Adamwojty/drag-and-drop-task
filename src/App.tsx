@@ -15,6 +15,7 @@ const App: React.FC<{}> = () => {
 };
 const Wrapper = styled.div`
   border: 1px solid black;
+  margin: 50px auto;
   width: 800px;
   padding: 10px;
   background-color: grey;

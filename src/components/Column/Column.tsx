@@ -3,75 +3,50 @@ import styled from "styled-components";
 import { useDrop } from "react-dnd";
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 import { ItemTypes } from "../../assets/data";
-import DraggableItem from "../Item/DraggableItem";
-import { addItem, moveItems, removeItem } from "../../config/redux/actions";
+import { moveItems } from "../../config/redux/actions";
 import { IColumnProps, IDragItem, IItem } from "./Column.types";
+import { renderItem } from "../../actions/renderItem";
+import { onItemDrop } from "../../actions/onItemDrop";
 
-const Column: React.FC<IColumnProps> = ({ id }) => {
-  const data = useSelector((state: RootStateOrAny) => state.reducer[id]?.greens);
+const Column: React.FC<IColumnProps> = ({ colId }) => {
+  const data = useSelector((state: RootStateOrAny) => state.reducer);
   const dispatch = useDispatch();
+
+  const findItem = useCallback(
+    (id: number, colId: number) => {
+      const item = data[colId].greens.filter((c: IItem) => c.idx === id)[0];
+      return {
+        item,
+        index: data[colId].greens.indexOf(item),
+      };
+    },
+    [dispatch, data]
+  );
+  const moveItem = useCallback(
+    (itemId: number, atIndex: number, colId: number) => {
+      const { item, index } = findItem(itemId, colId);
+      dispatch(moveItems(atIndex, colId, item, index));
+    },
+    [dispatch, data]
+  );
 
   const [, drop] = useDrop({
     accept: [ItemTypes.ITEM, ItemTypes.ITEM_ADD],
     drop(item: IDragItem) {
-      if (item.type === ItemTypes.ITEM_ADD) {
-        const obj = {
-          idx: data.length,
-          title: `item-${id}-${data.length}`,
-        };
-        return dispatch(addItem(id, obj));
-      } else if (item.columnId !== id) {
-        const obj = {
-          idx: data.length,
-          title: item.title,
-        };
-        dispatch(removeItem(item.columnId, item.id));
-        dispatch(addItem(id, obj));
-      }
-
+      onItemDrop(item, dispatch, data, colId, findItem);
       return undefined;
     },
   });
-  const findItem = useCallback(
-    (id: number) => {
-      const item = data.filter((c: IItem) => c.idx === id)[0];
-      return {
-        item,
-        index: data.indexOf(item),
-      };
-    },
-    [data]
-  );
-  const moveItem = useCallback(
-    (itemId: number, atIndex: number) => {
-      const { item, index } = findItem(itemId);
-      dispatch(moveItems(atIndex, id, item, index));
-    },
-    [data]
-  );
-
-  const renderItem = (item: IItem) => {
-    return (
-      <DraggableItem
-        key={item.idx}
-        id={item.idx}
-        title={item.title}
-        moveItem={moveItem}
-        findItem={findItem}
-        columnId={id}
-      />
-    );
-  };
-  return <Col ref={drop}>{data && data.map((item: IItem) => renderItem(item))}</Col>;
+  const items = data[colId].greens;
+  return <Col ref={drop}>{items && items.map((item: IItem) => renderItem(item, moveItem, findItem, colId))}</Col>;
 };
 const Col = styled.div`
   box-sizing: border-box;
-  font-weight: 800;
-  border: 3px solid black;
-  padding: 5px 0;
-  width: 200px;
-  height: 550px;
+  border: 2px solid black;
+  width: 175px;
+  height: 600px;
   cursor: move;
   background-color: red;
+  overflow-y: auto;
 `;
 export default Column;

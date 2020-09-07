@@ -13,10 +13,7 @@ interface IInitialState {
   };
 }
 
-const initialState: IInitialState = {
-  0: { top: 0, left: 40, title: "col-0", greens: [{ idx: 0, title: "item-0-0" }] },
-  1: { top: 0, left: 280, title: "col-0", greens: [{ idx: 0, title: "item-1-0" }] },
-};
+const initialState: IInitialState = {};
 
 export const reducer = (state = initialState, action: any) => {
   switch (action.type) {

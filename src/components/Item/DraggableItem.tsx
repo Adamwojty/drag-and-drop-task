@@ -2,22 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { useDrag, DragSourceMonitor, useDrop } from "react-dnd";
 import { ItemTypes } from "../../assets/data";
-import { IDraggableItemProps } from "./Item.types";
+import { IDraggableItemProps, IDragItem } from "./Item.types";
 import Item from "./Item";
 
 const DraggableItem: React.FC<IDraggableItemProps> = ({ id, title, columnId, moveItem, findItem }) => {
-  const originalIndex = findItem(id).index;
+  const originalIndex = findItem(id, columnId).index;
+
   const [{ isDragging }, drag] = useDrag({
     item: { type: ItemTypes.ITEM, id, originalIndex, columnId, title },
     end: (dropResult, monitor) => {
       const { id: droppedId, originalIndex } = monitor.getItem();
       const didDrop = monitor.didDrop();
-
       if (!didDrop) {
-        moveItem(droppedId, originalIndex);
+        moveItem(droppedId, originalIndex, columnId);
       }
     },
-
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -25,17 +24,17 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({ id, title, columnId, mov
   const [, drop] = useDrop({
     accept: ItemTypes.ITEM,
     canDrop: () => false,
-    hover({ id: draggedId }: any) {
-      const { index: overIndex } = findItem(id);
-      if (draggedId !== id) {
-        moveItem(draggedId, overIndex);
+    hover(item: IDragItem) {
+      const { index: overIndex } = findItem(id, columnId);
+      if (item.id !== id && columnId === item.columnId) {
+        moveItem(item.id, overIndex, columnId);
       }
     },
   });
 
   return (
     <Wrapper isDragging={isDragging} ref={(node) => drag(drop(node))}>
-      <Item title={title} id={id} />
+      <Item title={title} />
     </Wrapper>
   );
 };

@@ -1,14 +1,16 @@
 export interface IColumnProps {
-  id: number;
+  colId: number;
 }
 export interface IDragItem {
   id: number;
   type: string;
   title: string;
   columnId: number;
+  originalIndex: number;
 }
 export interface IItem {
   idx: number;
+  id: number;
   title: string;
 }
 export interface IColumnDragPreviewProps {
@@ -18,5 +20,4 @@ export interface IDraggableColumnProps {
   id: number;
   title: string;
   left: number;
-  top: number;
 }

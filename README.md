@@ -17,6 +17,8 @@
     <li>Drag green square into red columns</li>
 </ol>
 <ol>
-    <li>U can only drag red squares into diagramming space</li>
+    <li>You can only drag red squares into diagramming space</li>
     <li>Green suares can't be placed into diagramming space</li>
+    <li>You can move green squares between red columns</li>
+    <li>You can rearrange green squares order</li>
 </ol>

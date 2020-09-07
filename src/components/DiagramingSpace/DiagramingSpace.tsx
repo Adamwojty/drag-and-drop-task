@@ -1,27 +1,18 @@
 import React from "react";
 import { useDrop, DropTargetMonitor } from "react-dnd";
 import styled from "styled-components";
-import DraggableColumn from "../Column/DraggableColumn";
 import { ItemTypes } from "../../assets/data";
 import { snapToGrid } from "../../actions/snapToGrid";
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 import { addColumn, moveColumn } from "../../config/redux/actions";
+import { renderColumn } from "../../actions/renderColumn";
 
-interface IColumn {
-  top: number;
-  left: number;
-  title: string;
-}
 export interface IDragColumn {
   id: number;
   type: string;
   left: number;
   top: number;
 }
-
-const renderColumn = (item: IColumn, key: number) => {
-  return <DraggableColumn key={key} id={key} {...item} />;
-};
 
 const DiagramingSpace: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -36,7 +27,6 @@ const DiagramingSpace: React.FC<{}> = () => {
 
       let left: number = Math.round(item.left + delta.x);
       let top: number = 0;
-      [left, top] = snapToGrid(left, top);
 
       const obj = {
         top,
@@ -44,11 +34,12 @@ const DiagramingSpace: React.FC<{}> = () => {
         title: `col-${item.id}`,
         greens: [],
       };
-
-      if (item.type === ItemTypes.COLUMN_ADD) {
+      if (item.type === ItemTypes.COLUMN_ADD && Object.keys(data).length < 4 && left <= 650 && left >= 0) {
+        [left, top] = snapToGrid(left, top);
         return dispatch(addColumn(item.id, obj));
+      } else if (item.type === ItemTypes.COLUMN && left <= 650 && left >= 0) {
+        dispatch(moveColumn(item.id, left));
       }
-      dispatch(moveColumn(item.id, left));
       return undefined;
     },
   });
@@ -59,11 +50,10 @@ const DiagramingSpace: React.FC<{}> = () => {
 };
 
 const Wrapper = styled.div`
-  min-width: 800px;
+  width: 800px;
   height: 600px;
   border: 3px solid black;
   position: relative;
   background-color: white;
-  overflow-x: auto;
 `;
 export default DiagramingSpace;

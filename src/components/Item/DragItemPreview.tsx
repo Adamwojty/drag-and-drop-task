@@ -1,12 +1,12 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 import Item from "./Item";
-import { IColumnDragPreviewProps } from "./Item.types";
+import { IItemProps } from "./Item.types";
 
-const DragItemPreview: React.FC<IColumnDragPreviewProps> = memo(({ title, id }) => {
+const DragItemPreview: React.FC<IItemProps> = memo(({ title }) => {
   return (
     <Wrapper>
-      <Item title={title} id={id} />
+      <Item title={title} />
     </Wrapper>
   );
 });
